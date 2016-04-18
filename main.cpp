@@ -2,13 +2,14 @@
 //Final Project Code Testing
 
 #ifdef _WINDOWS
-#include <GL/glew.h>
+#//include <GL/glew.h>
 #endif
-#include <SDL.h>
-#include <SDL_opengl.h>
-#include <SDL_image.h>
+//#include <SDL.h>
+//#include <SDL_opengl.h>
+//#include <SDL_image.h>
 #include <SDL_mixer.h>
-#include "ShaderProgram.h"
+//#include "ShaderProgram.h"
+#include "SheetSprite.h"
 #include "Matrix.h"
 #include "Entity.h"
 #include "Bullet.h"
@@ -26,7 +27,6 @@ using namespace std;
 
 #define LEVEL_HEIGHT 25
 #define LEVEL_WIDTH 25
-
 
 SDL_Window* displayWindow;
 float lastFrameTicks = 0.0f;

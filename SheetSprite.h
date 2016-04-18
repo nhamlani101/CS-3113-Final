@@ -2,6 +2,10 @@
 #include <GL/glew.h>
 #endif
 
+
+#ifndef SPRITESHEET_H
+#define SPRITESHEET_H
+
 #include <SDL.h>
 #include "ShaderProgram.h"
 #include <SDL_opengl.h>
@@ -20,3 +24,5 @@ public:
 	float width;
 	float height;
 };
+
+#endif

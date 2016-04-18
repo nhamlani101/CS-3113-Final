@@ -1,6 +1,8 @@
+#ifndef BULLET_H
+#define BULLET_H
+
 #include "ShaderProgram.h"
 #include "SheetSprite.h"
-
 
 class Bullet {
 public:
@@ -16,3 +18,5 @@ public:
 	Matrix modelMatrix;
 	ShaderProgram* program;
 };
+
+#endif

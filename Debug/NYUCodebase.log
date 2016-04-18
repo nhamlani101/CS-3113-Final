@@ -1,57 +1,19 @@
-﻿Build started 4/18/2016 2:41:36 PM.
-     1>Project "C:\Users\noman\Downloads\CS3113-Assignment-5-master\CS3113-Assignment-5-master\NYUCodebase.vcxproj" on node 2 (Build target(s)).
+﻿Build started 4/18/2016 3:51:37 PM.
+     1>Project "C:\Users\noman\Documents\CS-3113-Final\NYUCodebase.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppBuild.targets(388,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (NYUCodebase.vcxproj).  This can lead to incorrect clean and rebuild behavior.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bullet.cpp Entity.cpp main.cpp
-         main.cpp
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\sheetsprite.h(10): error C2011: 'SheetSprite' : 'class' type redefinition
-                 c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\sheetsprite.h(10) : see declaration of 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(10): error C2079: 'Bullet::sprite' uses undefined class 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(8): error C2440: 'initializing' : cannot convert from 'SheetSprite' to 'int'
-                 Source or target has incomplete type
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(8): error C2439: 'Bullet::sprite' : member could not be initialized
-                 c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(10) : see declaration of 'Bullet::sprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(17): error C2079: 'Entity::sprite' uses undefined class 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(10): error C2440: 'initializing' : cannot convert from 'SheetSprite' to 'int'
-                 Source or target has incomplete type
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(10): error C2439: 'Entity::sprite' : member could not be initialized
-                 c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(17) : see declaration of 'Entity::sprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(5): error C2011: 'Bullet' : 'class' type redefinition
-                 c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(5) : see declaration of 'Bullet'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(223): error C2079: 'playerSprite' uses undefined class 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(223): error C2078: too many initializers
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(223): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(224): error C2079: 'player2Sprite' uses undefined class 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(224): error C2078: too many initializers
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(224): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(225): error C2079: 'bulletSprite' uses undefined class 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(225): error C2078: too many initializers
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(225): warning C4244: 'initializing' : conversion from 'double' to 'int', possible loss of data
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(226): error C2079: 'bullet' uses undefined class 'Bullet'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(226): error C2078: too many initializers
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\main.cpp(227): error C2664: 'Entity::Entity(const Entity &)' : cannot convert argument 1 from 'int' to 'SheetSprite'
-                 Source or target has incomplete type
-         Entity.cpp
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\sheetsprite.h(10): error C2011: 'SheetSprite' : 'class' type redefinition
-                 c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\sheetsprite.h(10) : see declaration of 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(10): error C2079: 'Bullet::sprite' uses undefined class 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(8): error C2440: 'initializing' : cannot convert from 'SheetSprite' to 'int'
-                 Source or target has incomplete type
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(8): error C2439: 'Bullet::sprite' : member could not be initialized
-                 c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\bullet.h(10) : see declaration of 'Bullet::sprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(17): error C2079: 'Entity::sprite' uses undefined class 'SheetSprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(10): error C2440: 'initializing' : cannot convert from 'SheetSprite' to 'int'
-                 Source or target has incomplete type
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(10): error C2439: 'Entity::sprite' : member could not be initialized
-                 c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.h(17) : see declaration of 'Entity::sprite'
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.cpp(4): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
-     1>c:\users\noman\downloads\cs3113-assignment-5-master\cs3113-assignment-5-master\entity.cpp(30): error C2228: left of '.Draw' must have class/struct/union
-                 type is 'int'
-         Generating Code...
-         Compiling...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bullet.cpp
          Bullet.cpp
-         Generating Code...
-     1>Done Building Project "C:\Users\noman\Downloads\CS3113-Assignment-5-master\CS3113-Assignment-5-master\NYUCodebase.vcxproj" (Build target(s)) -- FAILED.
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\noman\Documents\CS-3113-Final\Debug\CS3113 Final.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\noman\Documents\CS-3113-Final\Debug\CS3113 Final.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\noman\Documents\CS-3113-Final\Debug\CS3113 Final.lib" /MACHINE:X86 Debug\Bullet.obj
+         Debug\Entity.obj
+         Debug\main.obj
+         Debug\Matrix.obj
+         Debug\ShaderProgram.obj
+         Debug\SheetSprite.obj
+         NYUCodebase.vcxproj -> C:\Users\noman\Documents\CS-3113-Final\Debug\CS3113 Final.exe
+     1>Done Building Project "C:\Users\noman\Documents\CS-3113-Final\NYUCodebase.vcxproj" (Build target(s)).
 
-Build FAILED.
+Build succeeded.
 
-Time Elapsed 00:00:07.98
+Time Elapsed 00:00:03.50
