@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -47,6 +48,8 @@ GLuint player1ID;
 //GLuint player2ID;
 SheetSprite* p1sheet;
 Entity* player1;
+
+Mix_Chunk *jumpSound = Mix_LoadWAV("paddle_hit.wav");
 
 GLuint LoadTexture(const char* image_path){
 	SDL_Surface* surface = IMG_Load(image_path);
@@ -225,7 +228,7 @@ void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) 
 	*gridY = (int)(-worldY / TILE_SIZE);
 }
 
-void update(float elapsed){
+void update(float elapsed){	
 
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
@@ -246,8 +249,11 @@ void update(float elapsed){
 		player1->shootBullet();
 	}
 	if (keys[SDL_SCANCODE_UP]) {
-		if (player1->collidedBottom)
+		if (player1->collidedBottom) {
 			player1->velocity_y = 6;
+			Mix_PlayChannel(-1, jumpSound, 0);
+		}
+
 	}
 	if (keys[SDL_SCANCODE_0]){ done = true; }
 
@@ -351,12 +357,17 @@ void init(){
 	player1 = new Entity(p1sheet, 4.0, -10.0, 0.5, 0.4, 0, 0, 0, 0, bullet);
 	
 	ents.push_back(player1);
-	
+	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+
+	Mix_Music *music;
+	music = Mix_LoadMUS("music.mp3");
 	//player2ID = LoadTexture("player2.png");
 	//p2sheet = new SheetSprite(program, player1ID, 0, 0, 1, 1, 1.0);
 	//player2 = new Entity(p2sheet, 8.0, -10.0, 2.0, 0.4, 0, 0, 0, 0);
 	//ents.push_back(player2);
 	readMap();
+
+	Mix_PlayMusic(music, -1);
 }
 
 void scrollingP1(){
