@@ -1,0 +1,33 @@
+﻿Build started 4/28/2016 10:58:11 PM.
+     1>Project "C:\Users\Marcus\Desktop\Final\CS-3113-Final-master\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Entity.cpp main.cpp
+         Entity.cpp
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\entity.cpp(5): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
+         Generating Code...
+         Compiling...
+         main.cpp
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(80): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(307): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(314): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(321): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(328): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(335): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(344): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(394): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(399): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final\cs-3113-final-master\nyucodebase\main.cpp(405): warning C4305: 'argument' : truncation from 'double' to 'float'
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Marcus\Desktop\Final\CS-3113-Final-master\Debug\NYUCodebase.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Marcus\Desktop\Final\CS-3113-Final-master\Debug\NYUCodebase.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Marcus\Desktop\Final\CS-3113-Final-master\Debug\NYUCodebase.lib" /MACHINE:X86 Debug\Bullet.obj
+         Debug\Entity.obj
+         Debug\main.obj
+         Debug\Matrix.obj
+         Debug\ShaderProgram.obj
+         Debug\SheetSprite.obj
+         NYUCodebase.vcxproj -> C:\Users\Marcus\Desktop\Final\CS-3113-Final-master\Debug\NYUCodebase.exe
+     1>Done Building Project "C:\Users\Marcus\Desktop\Final\CS-3113-Final-master\NYUCodebase\NYUCodebase.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.51
