@@ -33,6 +33,12 @@
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ParticleEmitter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Particle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Matrix.h">
@@ -50,11 +56,21 @@
     <ClInclude Include="Bullet.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ParticleEmitter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Particle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
     <None Include="vertex.glsl" />
     <None Include="fragment_textured.glsl" />
+    <None Include="vertex_textured.glsl" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="arne_sprites.png">
@@ -69,18 +85,20 @@
     <Image Include="bullet.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="font1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="map.txt">
+    <Media Include="music.mp3">
       <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="map2.txt">
+    </Media>
+    <Media Include="paddle_hit.wav">
       <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="map3.txt">
-      <Filter>Resource Files</Filter>
-    </Text>
-    <Text Include="map4.txt">
+    </Media>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="world1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>

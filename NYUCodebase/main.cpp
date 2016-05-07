@@ -4,7 +4,6 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
-#include <SDL_mixer.h>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -13,6 +12,7 @@
 #include "Entity.h"
 #include "Matrix.h"
 #include "ShaderProgram.h"
+#include "ParticleEmitter.h"
 
 #ifdef _WINDOWS
 #define RESOURCE_FOLDER ""
@@ -34,6 +34,8 @@ ShaderProgram* program;
 Matrix projectionMatrix;
 Matrix modelMatrix;
 Matrix viewMatrix;
+Matrix modelMatrixMain;
+Matrix modelMatrixOver;
 float lastFrameTicks;
 
 vector<float> vertexData;
@@ -42,14 +44,22 @@ int mapWidth;
 int mapHeight;
 int tileCount;
 unsigned char** levelData;
+const Uint8* keys = SDL_GetKeyboardState(NULL);
 vector<Entity*> ents;
+string fileName;
 GLuint mapID;
+GLuint textSheet;
 GLuint player1ID;
-//GLuint player2ID;
 SheetSprite* p1sheet;
 Entity* player1;
+GLuint player2ID;
+SheetSprite* p2sheet;
+Entity* player2;
+Entity* goal;
 
-Mix_Chunk *jumpSound = Mix_LoadWAV("paddle_hit.wav");
+enum GameState { TITLE = 1, LEVEL1 = 2, LEVEL2 = 3, LEVEL3 = 4, END = 5 };
+int gameState = 1;
+bool levelInit = true;
 
 GLuint LoadTexture(const char* image_path){
 	SDL_Surface* surface = IMG_Load(image_path);
@@ -66,6 +76,41 @@ GLuint LoadTexture(const char* image_path){
 	SDL_FreeSurface(surface);
 
 	return textureID;
+}
+
+void DrawText(ShaderProgram* program, int fontTexture, std::string text, float size, float spacing) {
+	float texture_size = 1.0 / 16.0f;
+	std::vector<float> vertexData;
+	std::vector<float> texCoordData;
+	for (int i = 0; i < text.size(); i++) {
+		float texture_x = (float)(((int)text[i]) % 16) / 16.0f;
+		float texture_y = (float)(((int)text[i]) / 16) / 16.0f;
+		vertexData.insert(vertexData.end(), {
+			((size + spacing) * i) + (-0.5f * size), 0.5f * size,
+			((size + spacing) * i) + (-0.5f * size), -0.5f * size,
+			((size + spacing) * i) + (0.5f * size), 0.5f * size,
+			((size + spacing) * i) + (0.5f * size), -0.5f * size,
+			((size + spacing) * i) + (0.5f * size), 0.5f * size,
+			((size + spacing) * i) + (-0.5f * size), -0.5f * size,
+		});
+		texCoordData.insert(texCoordData.end(), {
+			texture_x, texture_y,
+			texture_x, texture_y + texture_size,
+			texture_x + texture_size, texture_y,
+			texture_x + texture_size, texture_y + texture_size,
+			texture_x + texture_size, texture_y,
+			texture_x, texture_y + texture_size,
+		});
+	}
+	glUseProgram(program->programID);
+	glVertexAttribPointer(program->positionAttribute, 2, GL_FLOAT, false, 0, vertexData.data());
+	glEnableVertexAttribArray(program->positionAttribute);
+	glVertexAttribPointer(program->texCoordAttribute, 2, GL_FLOAT, false, 0, texCoordData.data());
+	glEnableVertexAttribArray(program->texCoordAttribute);
+	glBindTexture(GL_TEXTURE_2D, fontTexture);
+	glDrawArrays(GL_TRIANGLES, 0, text.size() * 6);
+	glDisableVertexAttribArray(program->positionAttribute);
+	glDisableVertexAttribArray(program->texCoordAttribute);
 }
 
 bool readHeader(std::ifstream &stream) {
@@ -145,26 +190,13 @@ bool readEntityData(std::ifstream &stream) {
 			getline(lineStream, yPosition, ',');
 			float placeX = atoi(xPosition.c_str()) / 16 * TILE_SIZE;
 			float placeY = atoi(yPosition.c_str()) / 16 * -TILE_SIZE;
-			/*
-			//placeEntity(type, placeX, placeY);
-			player1 = new Entity();
-			player1->x = placeX;
-			player1->y = placeY;
-			player1->height = TILE_SIZE;
-			player1->width = TILE_SIZE;
-			player1->isStatic = false;
-			player1->isSolid = true;
-			player1->sprite = new SheetSprite(mapID, player1->width, player1->height, 4.0);
-			//player1->entityType = type;
-			ents.push_back(player1);
-			*/
 		}
 	}
 	return true;
 }
 
-void readMap(){
-	ifstream infile("map2.txt");
+void readMap(string fileName){
+	ifstream infile(fileName);
 	string line;
 	while (getline(infile, line)) {
 		if (line == "[header]") {
@@ -228,74 +260,88 @@ void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) 
 	*gridY = (int)(-worldY / TILE_SIZE);
 }
 
-void update(float elapsed){	
+void update(float elapsed){
 
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 			done = true;
 		}
 	}
-	const Uint8* keys = SDL_GetKeyboardState(NULL);
 	if (keys[SDL_SCANCODE_RIGHT]){
 		player1->acceleration_x = 8.0;
+		
 	}
 	else if (keys[SDL_SCANCODE_LEFT]){
 		player1->acceleration_x = -8.0;
 	}
-	/*else{
+	else{
 		player1->acceleration_x = 0.0;
-	}*/
+	}
 	if (keys[SDL_SCANCODE_SPACE]){
 		player1->shootBullet();
 	}
-	if (keys[SDL_SCANCODE_UP]) {
-		if (player1->collidedBottom) {
-			player1->velocity_y = 6;
-			Mix_PlayChannel(-1, jumpSound, 0);
-		}
 
+	if (keys[SDL_SCANCODE_W]) {
+		if (player2->collidedBottom)
+			player2->velocity_y = 6;
 	}
+	if (keys[SDL_SCANCODE_D]){
+		player2->acceleration_x = 8.0;
+	}
+	else if (keys[SDL_SCANCODE_A]){
+		player2->acceleration_x = -8.0;
+	}
+	else{
+		player2->acceleration_x = 0.0;
+	}
+	if (keys[SDL_SCANCODE_S]){
+		player2->shootBullet();
+	}
+	if (keys[SDL_SCANCODE_UP]) {
+		if (player1->collidedBottom)
+			player1->velocity_y = 6;
+	}
+
 	if (keys[SDL_SCANCODE_0]){ done = true; }
 
-	
-		//player1->acceleration_y = 0.0;
-	
+		
 	player1->Update(elapsed);
+	player2->Update(elapsed);
 }
 
 void checkCollisions(){
-	//for (int i = 0; i < ents.size(); i++){
+	for (int i = 0; i < ents.size(); i++){
 		int gridX, gridY;
 
 		//bottom collision
-		worldToTileCoordinates(player1->x, player1->y - player1->height / 2, &gridX, &gridY);
+		worldToTileCoordinates(ents[i]->x, ents[i]->y - ents[i]->height / 2, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
-			player1->velocity_y = 0;
-			//player1->y += 0.5;
-			player1->collidedBottom = true;
+			ents[i]->velocity_y = 0;
+			ents[i]->y += 0.001;
+			ents[i]->collidedBottom = true;
 		}
 		//top collision
-		worldToTileCoordinates(player1->x, player1->y + player1->height / 2, &gridX, &gridY);
+		worldToTileCoordinates(ents[i]->x, ents[i]->y + ents[i]->height / 2, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
-			player1->velocity_y = 0;
-			//player1->y -= 0.5;
-			player1->collidedTop = true;
+			ents[i]->velocity_y = 0;
+			ents[i]->y -= 0.001;
+			ents[i]->collidedTop = true;
 		}
 		//left collision
-		worldToTileCoordinates(player1->x - player1->width / 2, player1->y, &gridX, &gridY);
+		worldToTileCoordinates(ents[i]->x - ents[i]->width / 2, ents[i]->y, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
-			player1->velocity_x = 0;
-			//player1->x += 0.5;
-			player1->collidedLeft = true;
+			ents[i]->velocity_x = 0.001;
+			ents[i]->x += 0.001;
+			ents[i]->collidedLeft = true;
 		}
 		//right collision
-		worldToTileCoordinates(player1->x + player1->width / 2, player1->y, &gridX, &gridY);
+		worldToTileCoordinates(ents[i]->x + ents[i]->width / 2, ents[i]->y, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
-			player1->velocity_x = 0;
-			//player1->x -= 0.5;
-			player1->collidedRight = true;
+			ents[i]->velocity_x = 0;
+			ents[i]->x -= 0.001;
+			ents[i]->collidedRight = true;
 		}
-	//}
+	}
 }
 
 void render(){
@@ -307,6 +353,7 @@ void render(){
 }
 
 void updateAndRender(){
+
 	float ticks = (float)SDL_GetTicks() / 1000.0f;
 	float elapsed = ticks - lastFrameTicks;
 	lastFrameTicks = ticks;
@@ -326,7 +373,7 @@ void updateAndRender(){
 
 void init(){
 	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("CS3113 Final", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 640, 360, SDL_WINDOW_OPENGL);
+	displayWindow = SDL_CreateWindow("CS3113 Final", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
 	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
 #ifdef _WINDOWS
@@ -334,8 +381,6 @@ void init(){
 #endif
 
 	done = false;
-
-	glViewport(0, 0, 640, 360);
 
 	program = new ShaderProgram(RESOURCE_FOLDER"vertex_textured.glsl", RESOURCE_FOLDER"fragment_textured.glsl");
 	projectionMatrix.setOrthoProjection(-8.0f, 8.0f, -6.0f, 6.0f, -1.0f, 1.0f);
@@ -347,27 +392,6 @@ void init(){
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-
-	mapID = LoadTexture("arne_sprites.png");
-	player1ID = LoadTexture("player1.png");
-	GLuint bulletTexture = LoadTexture("bullet.png");
-	SheetSprite bulletSprite(program, bulletTexture, 0, 0, 0.1, 0.06, 0.1);
-	Bullet bullet(program, bulletSprite);
-	p1sheet = new SheetSprite(program, player1ID, 0, 0, 1, 1, 1.0);
-	player1 = new Entity(p1sheet, 4.0, -10.0, 0.5, 0.4, 0, 0, 0, 0, bullet);
-	
-	ents.push_back(player1);
-	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-
-	Mix_Music *music;
-	music = Mix_LoadMUS("music.mp3");
-	//player2ID = LoadTexture("player2.png");
-	//p2sheet = new SheetSprite(program, player1ID, 0, 0, 1, 1, 1.0);
-	//player2 = new Entity(p2sheet, 8.0, -10.0, 2.0, 0.4, 0, 0, 0, 0);
-	//ents.push_back(player2);
-	readMap();
-
-	Mix_PlayMusic(music, -1);
 }
 
 void scrollingP1(){
@@ -376,17 +400,95 @@ void scrollingP1(){
 	program->setViewMatrix(viewMatrix);
 }
 
+void scrollingP2(){
+	viewMatrix.identity();
+	viewMatrix.Translate(-player2->x, -player2->y, 0);
+	program->setViewMatrix(viewMatrix);
+}
+
+void level1(string fileName){
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	if (levelInit){
+		mapID = LoadTexture("arne_sprites.png");
+
+		GLuint bulletTexture = LoadTexture("bullet.png");
+		SheetSprite bulletSprite(program, bulletTexture, 0, 0, 0.1, 0.06, 0.1);
+		Bullet bullet(program, bulletSprite);
+
+		player1ID = LoadTexture("player1.png");
+		p1sheet = new SheetSprite(program, player1ID, 0, 0, 1, 1, 1.0);
+		player1 = new Entity(p1sheet, 4.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, bullet);
+
+		ents.push_back(player1);
+
+		player2ID = LoadTexture("player2.png");
+		p2sheet = new SheetSprite(program, player2ID, 0, 0, 1, 1, 1.0);
+		player2 = new Entity(p2sheet, 8.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, bullet);
+		ents.push_back(player2);
+
+		readMap(fileName);
+		levelInit = false;
+	}
+	updateAndRender();
+	scrollingP1();
+	SDL_GL_SwapWindow(displayWindow);
+}
+
+void titleScreen(){
+	glClear(GL_COLOR_BUFFER_BIT);
+
+	textSheet = LoadTexture("font1.png");
+	while (SDL_PollEvent(&event)) {
+		if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
+			done = true;
+		}
+	}
+
+	/*ParticleEmitter* emitter = new ParticleEmitter(15);
+	emitter->Render(program);*/
+
+	program->setModelMatrix(modelMatrixMain);
+	modelMatrixMain.identity();
+	modelMatrixMain.Translate(-5.8, 0.0, 0);
+	DrawText(program, textSheet, "CS 3113", 2.0, 0.0005f);
+	program->setModelMatrix(modelMatrixOver);
+	modelMatrixOver.identity();
+	modelMatrixOver.Translate(-6.5, -3.0, 0.0f);
+	DrawText(program, textSheet, "Marcus & Noman", 1.0, 0.0005f);
+
+	if (keys[SDL_SCANCODE_RETURN]) {
+		gameState = 2;
+	}
+	SDL_GL_SwapWindow(displayWindow);
+
+	return;
+}
+
 int main(int argc, char *argv[]){
 	init();
-	while (!done) { //you can press 0 to exit the game (if it were to work)
-		
+	while (!done) {
+		switch (gameState){
+			case TITLE:
+				titleScreen();
+				break;
+			case LEVEL1:
+				level1("world1.txt");
+				break;
+			case LEVEL2:
+				//level2();
+				break;
+			case LEVEL3:
+				//level3();
+				break;
+			case END:
+				//END();
+				break;
+		}
+		/*
 		updateAndRender();
 		scrollingP1();
-		//viewMatrix.identity();
-		//viewMatrix.Translate(-4.0, 8.0, 0);
-		//program->setViewMatrix(viewMatrix);
-		
-		SDL_GL_SwapWindow(displayWindow);
+		SDL_GL_SwapWindow(displayWindow);*/
 	}
 	SDL_Quit();
 	return 0;

@@ -19,24 +19,31 @@ void Entity::Update(float elapsed){
 	y += velocity_y * elapsed;
 	acceleration_x = 0;
 
+	
 	//if (bullet.alive) {
 		bullet.Update(elapsed);
 	
 }
 
 void Entity::Render(ShaderProgram* program){
-	Matrix modelMatrix;
-	modelMatrix.identity();
-	modelMatrix.Translate(x, y, 0);
-	program->setModelMatrix(modelMatrix);
+	modMatrix.identity();
+	modMatrix.Translate(x, y, 0);
+	//modMatrix.Scale(1.0, sin(1.0), 1.0);
+
+	if (velocity_x < 0) {
+		modMatrix.Scale(-1.0, 1.0, 1.0);
+	}
+	
+	program->setModelMatrix(modMatrix);
 	sprite->Draw();
 }
 
 void Entity::shootBullet() {
 	if (!bullet.alive){
-		bullet.x_pos = x;
-		bullet.y_pos = y;
+		bullet.x_pos = x + width;
+		bullet.y_pos = y + height;
 		bullet.direction = 1.0f;
 		bullet.alive = true;
+		bullet.sprite.Draw();
 	}
 }

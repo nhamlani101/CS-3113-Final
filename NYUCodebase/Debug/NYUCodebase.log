@@ -1,22 +1,27 @@
-﻿Build started 4/28/2016 11:57:43 AM.
+﻿Build started 5/7/2016 3:05:40 PM.
      1>Project "C:\Users\noman\Downloads\CS-3113-Final-Marcus-Edits\CS-3113-Final-Marcus-Edits\Final (Unfinished)\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bullet.cpp Entity.cpp main.cpp
-         Bullet.cpp
-         Generating Code...
-         Compiling...
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(298): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(348): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(351): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Entity.cpp
-     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\entity.cpp(5): warning C4244: 'return' : conversion from 'double' to 'float', possible loss of data
-         Generating Code...
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(85): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(313): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(320): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(327): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(333): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(334): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(341): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(350): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(416): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(421): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(427): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\downloads\cs-3113-final-marcus-edits\cs-3113-final-marcus-edits\final (unfinished)\nyucodebase\main.cpp(453): warning C4305: 'argument' : truncation from 'double' to 'float'
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\noman\Downloads\CS-3113-Final-Marcus-Edits\CS-3113-Final-Marcus-Edits\Final (Unfinished)\Debug\NYUCodebase.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\noman\Downloads\CS-3113-Final-Marcus-Edits\CS-3113-Final-Marcus-Edits\Final (Unfinished)\Debug\NYUCodebase.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\noman\Downloads\CS-3113-Final-Marcus-Edits\CS-3113-Final-Marcus-Edits\Final (Unfinished)\Debug\NYUCodebase.lib" /MACHINE:X86 Debug\Bullet.obj
          Debug\Entity.obj
          Debug\main.obj
          Debug\Matrix.obj
+         Debug\Particle.obj
+         Debug\ParticleEmitter.obj
          Debug\ShaderProgram.obj
          Debug\SheetSprite.obj
          NYUCodebase.vcxproj -> C:\Users\noman\Downloads\CS-3113-Final-Marcus-Edits\CS-3113-Final-Marcus-Edits\Final (Unfinished)\Debug\NYUCodebase.exe
@@ -24,4 +29,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:09.50
+Time Elapsed 00:00:03.97
