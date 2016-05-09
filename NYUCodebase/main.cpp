@@ -445,8 +445,10 @@ void titleScreen(){
 		}
 	}
 
-	/*ParticleEmitter* emitter = new ParticleEmitter(15);
-	emitter->Render(program);*/
+	ParticleEmitter emitter = ParticleEmitter(15);
+	emitter.Render(program);
+
+	emitter.Update()
 
 	program->setModelMatrix(modelMatrixMain);
 	modelMatrixMain.identity();
