@@ -6,6 +6,9 @@ public:
 	Vector();
 	Vector(float x, float y, float z);
 
+	Vector operator * (float scalar);
+	Vector operator + (const Vector& v2);
+
 	float x;
 	float y;
 	float z;

@@ -6,44 +6,44 @@ float Entity::lerp(float v0, float v1, float t) {
 }
 
 void Entity::Update(float elapsed){
-	collidedTop = false;
-	collidedBottom = false;
-	collidedLeft = false;
-	collidedRight = false;
+	//If players
+	if (cameFrom == 0) {
+		collidedTop = false;
+		collidedBottom = false;
+		collidedLeft = false;
+		collidedRight = false;
 
-	velocity_y += gravity * elapsed;
-	velocity_x = lerp(velocity_x, 0.0f, elapsed * friction_x);
-	velocity_x += acceleration_x * elapsed;
-	
-	x += velocity_x * elapsed;
-	y += velocity_y * elapsed;
-	acceleration_x = 0;
+		velocity_y += gravity * elapsed;
+		velocity_x = lerp(velocity_x, 0.0f, elapsed * friction_x);
+		velocity_x += acceleration_x * elapsed;
 
-	
-	//if (bullet.alive) {
-		bullet.Update(elapsed);
-	
+		x += velocity_x * elapsed;
+		y += velocity_y * elapsed;
+		acceleration_x = 0;
+	}
+	//if bullet
+	else {
+		velocity_x = lerp(velocity_x, 0.0f, elapsed);
+		velocity_x += acceleration_x * elapsed;
+
+		x += velocity_x * elapsed;
+		//acceleration_x = 1;
+	}
 }
 
 void Entity::Render(ShaderProgram* program){
-	modMatrix.identity();
-	modMatrix.Translate(x, y, 0);
-	//modMatrix.Scale(1.0, sin(1.0), 1.0);
+	if (!bulletDead) {
+		modMatrix.identity();
+		modMatrix.Translate(x, y, 0);
+		//modMatrix.Scale(1.0, sin(1.0), 1.0);
 
-	if (velocity_x < 0) {
-		modMatrix.Scale(-1.0, 1.0, 1.0);
+		if (velocity_x < 0 && cameFrom == 0) {
+			modMatrix.Scale(-1.0, 1.0, 1.0);
+		}
+
+		program->setModelMatrix(modMatrix);
+		sprite->Draw();
 	}
+}
+
 	
-	program->setModelMatrix(modMatrix);
-	sprite->Draw();
-}
-
-void Entity::shootBullet() {
-	if (!bullet.alive){
-		bullet.x_pos = x + width;
-		bullet.y_pos = y + height;
-		bullet.direction = 1.0f;
-		bullet.alive = true;
-		bullet.sprite.Draw();
-	}
-}

@@ -1,33 +1,47 @@
-#include "Vector.h"
+#ifndef PARTICLEEMITTER_H
+#define PARTICLEEMITTER_H
 #include "ShaderProgram.h"
+#include "Matrix.h"
+#include <map>
 #include <vector>
+#include "Vector.h"
+#include "Color.h"
+#include <SDL_image.h>
+#include <SDL.h>
+#include <SDL_opengl.h>
 
-using namespace std;
-
-#ifndef PARTICLE
-#define PARTICLE
-class Particle {
-public:
-	Vector position;
-	Vector velocity;
+struct Particle {
+	Particle();
+	Vector position, velocity;
 	float lifetime;
-	Particle() : lifetime(0.0f) {
-		velocity = Vector(0.0f, 0.0f, 0.0f);
-		position = Vector(0.0f, 0.0f, 0.0f);
-	};
+	float sizeDeviation;
 
 };
-#endif
+
 
 class ParticleEmitter {
+
 public:
-	ParticleEmitter(unsigned int particleCount) : particles(vector<Particle>(particleCount)) {}
 	ParticleEmitter();
-	~ParticleEmitter();
+	ParticleEmitter(unsigned int ParticleCount);
+	void SetTex(const char * path);
 
-	void Update(float elapsed);
+	void Update(float elasped);
 	void Render(ShaderProgram* program);
+	void EmitXDirection(int number, bool toTheRight);
+	void EmitYDirection(int number, bool toTheBottom);
+	void EmitYDirectionWithOffsetX(int number, bool toTheRight, bool toTheBotton, float offset);
 
-	float maxLifetime;
-	vector<Particle> particles;
+	float lerp(float start, float end, float time);
+
+	GLuint LoadTexture(const char * image_path);
+	GLuint texture;
+	Color startColor, endColor;
+	Vector position, gravity, velocity, velocityDeviation;
+
+	std::vector<Particle> particles;
+	std::vector<float> vertices, particleColors, texCoords, colors;
+
+	float minLifeTime, maxLifeTime, particleSize, decayRate, m, startSize, endSize, sizeDeviation;
 };
+#endif

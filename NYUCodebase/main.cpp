@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <SDL_opengl.h>
 #include <SDL_image.h>
+#include <SDL_mixer.h>
 #include <fstream>
 #include <string>
 #include <iostream>
@@ -28,6 +29,8 @@ using namespace std;
 
 //Globals
 SDL_Window* displayWindow;
+SDL_Window* displayWindow2;
+SDL_GLContext context;
 SDL_Event event;
 bool done;
 ShaderProgram* program;
@@ -40,6 +43,7 @@ float lastFrameTicks;
 
 vector<float> vertexData;
 vector<float> texCoordData;
+vector<Entity*> bullets;
 int mapWidth;
 int mapHeight;
 int tileCount;
@@ -56,6 +60,12 @@ GLuint player2ID;
 SheetSprite* p2sheet;
 Entity* player2;
 Entity* goal;
+GLuint bulletID;
+SheetSprite* bulletSprite;
+ParticleEmitter emitter;
+bool levelOver;
+Mix_Chunk *jumpSound;
+
 
 enum GameState { TITLE = 1, LEVEL1 = 2, LEVEL2 = 3, LEVEL3 = 4, END = 5 };
 int gameState = 1;
@@ -260,11 +270,35 @@ void worldToTileCoordinates(float worldX, float worldY, int *gridX, int *gridY) 
 	*gridY = (int)(-worldY / TILE_SIZE);
 }
 
+void updateBullets(float elapsed) {
+	for (int i = 0; i < bullets.size(); i++) {
+		bullets[i]->Update(elapsed);
+		//bullets[i].Render(program);
+		//cout << i << endl;
+	}
+}
+
+
 void update(float elapsed){
 
 	while (SDL_PollEvent(&event)) {
 		if (event.type == SDL_QUIT || event.type == SDL_WINDOWEVENT_CLOSE) {
 			done = true;
+		}
+		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == SDLK_SPACE) {
+				Entity* p1Bullet = new Entity(bulletSprite, player1->x + player1->sprite->width + 0.001, player1->y, 0.5, 0.3, 7, 0, 1, 0, 1);
+				bullets.push_back(p1Bullet);
+				p1Bullet->Render(program);
+				//Mix_PlayChannel(-1, jumpSound, 0);
+
+			}
+			if (event.key.keysym.sym == SDLK_s) {
+				Entity* p2Bullet = new Entity(bulletSprite, player2->x + player2->sprite->width + 0.001, player2->y, 0.5, 0.3, 7, 0, 1, 0, 2);
+				bullets.push_back(p2Bullet);
+				p2Bullet->Render(program);
+				//Mix_PlayChannel(-1, jumpSound, 0);
+			}
 		}
 	}
 	if (keys[SDL_SCANCODE_RIGHT]){
@@ -277,10 +311,6 @@ void update(float elapsed){
 	else{
 		player1->acceleration_x = 0.0;
 	}
-	if (keys[SDL_SCANCODE_SPACE]){
-		player1->shootBullet();
-	}
-
 	if (keys[SDL_SCANCODE_W]) {
 		if (player2->collidedBottom)
 			player2->velocity_y = 6;
@@ -294,19 +324,17 @@ void update(float elapsed){
 	else{
 		player2->acceleration_x = 0.0;
 	}
-	if (keys[SDL_SCANCODE_S]){
-		player2->shootBullet();
-	}
+
 	if (keys[SDL_SCANCODE_UP]) {
 		if (player1->collidedBottom)
 			player1->velocity_y = 6;
 	}
 
 	if (keys[SDL_SCANCODE_0]){ done = true; }
-
-		
+	
 	player1->Update(elapsed);
 	player2->Update(elapsed);
+	updateBullets(elapsed);
 }
 
 void checkCollisions(){
@@ -316,13 +344,28 @@ void checkCollisions(){
 		//bottom collision
 		worldToTileCoordinates(ents[i]->x, ents[i]->y - ents[i]->height / 2, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
-			ents[i]->velocity_y = 0;
-			ents[i]->y += 0.001;
-			ents[i]->collidedBottom = true;
+			if (levelData[gridY][gridX] == 49){
+				ents[i]->wins++;
+				levelOver = true;
+			}
+			else{
+				ents[i]->velocity_y = 0;
+				ents[i]->y += 0.001;
+				ents[i]->collidedBottom = true;
+			}
 		}
 		//top collision
 		worldToTileCoordinates(ents[i]->x, ents[i]->y + ents[i]->height / 2, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
+			if (levelData[gridY][gridX] == 49){
+				ents[i]->wins++;
+				levelOver = true;
+			}
+			else{
+				ents[i]->velocity_y = 0;
+				ents[i]->y += 0.001;
+				ents[i]->collidedBottom = true;
+			}
 			ents[i]->velocity_y = 0;
 			ents[i]->y -= 0.001;
 			ents[i]->collidedTop = true;
@@ -330,6 +373,15 @@ void checkCollisions(){
 		//left collision
 		worldToTileCoordinates(ents[i]->x - ents[i]->width / 2, ents[i]->y, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
+			if (levelData[gridY][gridX] == 49){
+				ents[i]->wins++;
+				levelOver = true;
+			}
+			else{
+				ents[i]->velocity_y = 0;
+				ents[i]->y += 0.001;
+				ents[i]->collidedBottom = true;
+			}
 			ents[i]->velocity_x = 0.001;
 			ents[i]->x += 0.001;
 			ents[i]->collidedLeft = true;
@@ -337,18 +389,52 @@ void checkCollisions(){
 		//right collision
 		worldToTileCoordinates(ents[i]->x + ents[i]->width / 2, ents[i]->y, &gridX, &gridY);
 		if (levelData[gridY][gridX] != 0){
+			if (levelData[gridY][gridX] == 49){
+				ents[i]->wins++;
+				levelOver = true;
+			}
+			else{
+				ents[i]->velocity_y = 0;
+				ents[i]->y += 0.001;
+				ents[i]->collidedBottom = true;
+			}
 			ents[i]->velocity_x = 0;
 			ents[i]->x -= 0.001;
 			ents[i]->collidedRight = true;
 		}
 	}
+	for (int i = 0; i < bullets.size(); i++) {
+		for (int j = 0; j < ents.size(); j++) {
+			if (!bullets[i]->bulletDead) {
+				if (j == 0 && bullets[i]->cameFrom == 1) {
+					//Do nothing we're good
+				}
+				if (j == 1 && bullets[i]->cameFrom == 2) {
+					//Do nothing we're good
+				}
+				else if (ents[j]->y - ents[j]->sprite->height < bullets[i]->y + bullets[i]->sprite->height &&
+					ents[j]->y + ents[j]->sprite->height > bullets[i]->y - bullets[i]->sprite->height &&
+					ents[j]->x + ents[j]->sprite->width > bullets[i]->x + bullets[i]->sprite->width &&
+					ents[j]->x - ents[j]->sprite->width < bullets[i]->x - bullets[i]->sprite->width)
+				{
+					ents[j]->health = ents[j]->health - 1;
+					bullets[i]->bulletDead = true;
+					cout << "Player: " << j << " health: " << ents[j]->health << endl;
+				}
+			}
+		}
+	}
 }
+
 
 void render(){
 	glClear(GL_COLOR_BUFFER_BIT);
 	renderWorld();
 	for (int i = 0; i < ents.size(); i++){
 		ents[i]->Render(program);
+	}
+	for (int i = 0; i < bullets.size(); i++) {
+		bullets[i]->Render(program);
 	}
 }
 
@@ -371,11 +457,29 @@ void updateAndRender(){
 	render();
 }
 
+void resetLevel(){
+	gameState += 1;
+	levelInit = true;
+	levelOver = false;
+	for (int i = 0; i < vertexData.size(); i++){
+		vertexData[i] = NULL;
+	}
+	for (int i = 0; i < texCoordData.size(); i++){
+		texCoordData[i] = NULL;
+	}
+	for (int i = 0; i < ents.size() + 1; i++){
+		ents.pop_back();
+	}
+}
 void init(){
 	SDL_Init(SDL_INIT_VIDEO);
-	displayWindow = SDL_CreateWindow("CS3113 Final", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_OPENGL);
-	SDL_GLContext context = SDL_GL_CreateContext(displayWindow);
+
+	displayWindow = SDL_CreateWindow("Player2 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 450, SDL_WINDOW_OPENGL);
+	context = SDL_GL_CreateContext(displayWindow);
 	SDL_GL_MakeCurrent(displayWindow, context);
+
+	displayWindow2 = SDL_CreateWindow("Player1 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 450, SDL_WINDOW_OPENGL);
+
 #ifdef _WINDOWS
 	glewInit();
 #endif
@@ -409,30 +513,44 @@ void scrollingP2(){
 void level1(string fileName){
 	glClear(GL_COLOR_BUFFER_BIT);
 
+	/*GLint levelUniform = glGetUniformLocation(program->programID, "level");
+
+	glUniform1i(levelUniform, 1);*/
+
 	if (levelInit){
 		mapID = LoadTexture("arne_sprites.png");
 
-		GLuint bulletTexture = LoadTexture("bullet.png");
-		SheetSprite bulletSprite(program, bulletTexture, 0, 0, 0.1, 0.06, 0.1);
-		Bullet bullet(program, bulletSprite);
-
 		player1ID = LoadTexture("player1.png");
 		p1sheet = new SheetSprite(program, player1ID, 0, 0, 1, 1, 1.0);
-		player1 = new Entity(p1sheet, 4.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, bullet);
+		player1 = new Entity(p1sheet, 4.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, 0);
 
 		ents.push_back(player1);
 
 		player2ID = LoadTexture("player2.png");
 		p2sheet = new SheetSprite(program, player2ID, 0, 0, 1, 1, 1.0);
-		player2 = new Entity(p2sheet, 8.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, bullet);
+		player2 = new Entity(p2sheet, 8.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, 0);
 		ents.push_back(player2);
+
+		bulletID = LoadTexture("bullet.png");
+		bulletSprite = new SheetSprite(program, bulletID, 0, 0, 0.05, 0.03, 0.06);
 
 		readMap(fileName);
 		levelInit = false;
 	}
 	updateAndRender();
+	if (levelOver){
+		resetLevel();
+	}
+
+	SDL_GL_MakeCurrent(displayWindow, context);
+	render();
 	scrollingP1();
 	SDL_GL_SwapWindow(displayWindow);
+
+	SDL_GL_MakeCurrent(displayWindow2, context);
+	render();
+	scrollingP2();
+	SDL_GL_SwapWindow(displayWindow2);
 }
 
 void titleScreen(){
@@ -445,14 +563,31 @@ void titleScreen(){
 		}
 	}
 
-	ParticleEmitter emitter = ParticleEmitter(15);
-	emitter.Render(program);
+	//Matrix particleModel;
+	//emitter.Render(program);
 
-	emitter.Update()
+	//float ticks = (float)SDL_GetTicks() / 1000.0f;
+	//float elapsed = ticks - lastFrameTicks;
+	//lastFrameTicks = ticks;
 
-	program->setModelMatrix(modelMatrixMain);
+	//float fixedElapsed = elapsed;
+	//if (fixedElapsed > FIXED_TIMESTEP * MAX_TIMESTEPS) {
+	//	fixedElapsed = FIXED_TIMESTEP * MAX_TIMESTEPS;
+	//}
+	//while (fixedElapsed >= FIXED_TIMESTEP) {
+	//	fixedElapsed -= FIXED_TIMESTEP;
+	//	emitter.Update(FIXED_TIMESTEP);
+	//}
+	//
+	//emitter.Update(elapsed);
+	//emitter.EmitXDirection(10, true);
+	//emitter.EmitYDirection(10, false);
+	//particleModel.Translate(0.0, 5.8, 0.0);
+	//program->setModelMatrix(particleModel);
+
 	modelMatrixMain.identity();
 	modelMatrixMain.Translate(-5.8, 0.0, 0);
+	program->setModelMatrix(modelMatrixMain);
 	DrawText(program, textSheet, "CS 3113", 2.0, 0.0005f);
 	program->setModelMatrix(modelMatrixOver);
 	modelMatrixOver.identity();
@@ -475,7 +610,7 @@ int main(int argc, char *argv[]){
 				titleScreen();
 				break;
 			case LEVEL1:
-				level1("world1.txt");
+				level1("level1.txt");
 				break;
 			case LEVEL2:
 				//level2();

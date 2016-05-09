@@ -1,34 +1,36 @@
-﻿Build started 5/7/2016 8:45:04 PM.
-     1>Project "C:\Users\noman\Documents\CS-3113-Final\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
+﻿Build started 5/9/2016 5:16:51 PM.
+     1>Project "C:\Users\noman\Desktop\Game\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Bullet.cpp Entity.cpp main.cpp Matrix.cpp ParticleEmitter.cpp ShaderProgram.cpp SheetSprite.cpp Vector.cpp
-         Vector.cpp
-         Generating Code...
-         Compiling...
-         ParticleEmitter.cpp
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\particleemitter.cpp(7): warning C4018: '<' : signed/unsigned mismatch
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
          main.cpp
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(85): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(313): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(320): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(327): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(333): warning C4305: '=' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(334): warning C4305: '+=' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(341): warning C4305: '-=' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(350): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(416): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(421): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(427): warning C4305: 'argument' : truncation from 'double' to 'float'
-     1>c:\users\noman\documents\cs-3113-final\nyucodebase\main.cpp(453): warning C4305: 'argument' : truncation from 'double' to 'float'
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         SheetSprite.cpp
-         ShaderProgram.cpp
-         Matrix.cpp
-         Entity.cpp
-         Bullet.cpp
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(95): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(274): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(290): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(290): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(297): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(297): warning C4244: 'argument' : conversion from 'double' to 'float', possible loss of data
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(341): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(353): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(366): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(370): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(382): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(385): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(386): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(398): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(402): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(406): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(407): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(433): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(436): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(464): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(467): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(470): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(525): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(531): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(535): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\noman\desktop\game\nyucodebase\main.cpp(589): warning C4305: 'argument' : truncation from 'double' to 'float'
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\noman\Documents\CS-3113-Final\Debug\NYUCodebase.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\noman\Documents\CS-3113-Final\Debug\NYUCodebase.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\noman\Documents\CS-3113-Final\Debug\NYUCodebase.lib" /MACHINE:X86 Debug\Bullet.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\noman\Desktop\Game\Debug\NYUCodebase.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\noman\Desktop\Game\Debug\NYUCodebase.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\noman\Desktop\Game\Debug\NYUCodebase.lib" /MACHINE:X86 Debug\Color.obj
          Debug\Entity.obj
          Debug\main.obj
          Debug\Matrix.obj
@@ -36,10 +38,9 @@
          Debug\ShaderProgram.obj
          Debug\SheetSprite.obj
          Debug\Vector.obj
-     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
-         NYUCodebase.vcxproj -> C:\Users\noman\Documents\CS-3113-Final\Debug\NYUCodebase.exe
-     1>Done Building Project "C:\Users\noman\Documents\CS-3113-Final\NYUCodebase\NYUCodebase.vcxproj" (Build target(s)).
+         NYUCodebase.vcxproj -> C:\Users\noman\Desktop\Game\Debug\NYUCodebase.exe
+     1>Done Building Project "C:\Users\noman\Desktop\Game\NYUCodebase\NYUCodebase.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:09.56
+Time Elapsed 00:00:04.17

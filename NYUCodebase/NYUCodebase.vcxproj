@@ -74,7 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
@@ -84,7 +84,7 @@
     <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Bullet.h" />
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="ParticleEmitter.h" />
@@ -102,6 +102,7 @@
     <Image Include="arne_sprites.png" />
     <Image Include="bullet.png" />
     <Image Include="font1.png" />
+    <Image Include="particle.png" />
     <Image Include="player1.png" />
     <Image Include="player2.png" />
   </ItemGroup>
