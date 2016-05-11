@@ -1,0 +1,3 @@
+Game 1
+Charizard wins: 2
+Pikachu wins: 0

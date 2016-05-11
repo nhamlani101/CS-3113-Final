@@ -1,0 +1,51 @@
+﻿Build started 5/11/2016 1:19:39 PM.
+     1>Project "C:\Users\Marcus\Desktop\Final 4.0\CS-3113-Final-master\NYUCodebase\NYUCodebase.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\SDL2\include /IC:\SDL2_image\include /IC:\glew\include /IC:\SDL2_mixer\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _WINDOWS /D _MBCS /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
+         main.cpp
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(95): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(274): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(287): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(294): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(338): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(353): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(369): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(384): warning C4305: '=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(385): warning C4305: '+=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(401): warning C4305: '-=' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(407): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(408): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(428): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(444): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(447): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(474): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(477): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(480): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(484): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(523): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(580): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(679): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(686): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(690): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(719): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(726): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(730): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(758): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(765): warning C4305: 'argument' : truncation from 'double' to 'float'
+     1>c:\users\marcus\desktop\final 4.0\cs-3113-final-master\nyucodebase\main.cpp(769): warning C4305: 'argument' : truncation from 'double' to 'float'
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Marcus\Desktop\Final 4.0\CS-3113-Final-master\Debug\NYUCodebase.exe" /INCREMENTAL /NOLOGO /LIBPATH:C:\SDL2_mixer\lib\x86 /LIBPATH:C:\SDL2\lib\x86 /LIBPATH:C:\SDL2_image\lib\x86 /LIBPATH:C:\glew\lib\Release\Win32 SDL2.lib SDL2_mixer.lib glew32.lib SDL2main.lib SDL2_image.lib OpenGL32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Marcus\Desktop\Final 4.0\CS-3113-Final-master\Debug\NYUCodebase.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Marcus\Desktop\Final 4.0\CS-3113-Final-master\Debug\NYUCodebase.lib" /MACHINE:X86 Debug\Color.obj
+         Debug\Entity.obj
+         Debug\main.obj
+         Debug\Matrix.obj
+         Debug\ParticleEmitter.obj
+         Debug\ShaderProgram.obj
+         Debug\SheetSprite.obj
+         Debug\Vector.obj
+     1>MSVCRTD.lib(cinitexe.obj) : warning LNK4098: defaultlib 'msvcrt.lib' conflicts with use of other libs; use /NODEFAULTLIB:library
+         NYUCodebase.vcxproj -> C:\Users\Marcus\Desktop\Final 4.0\CS-3113-Final-master\Debug\NYUCodebase.exe
+     1>Done Building Project "C:\Users\Marcus\Desktop\Final 4.0\CS-3113-Final-master\NYUCodebase\NYUCodebase.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:02.47
