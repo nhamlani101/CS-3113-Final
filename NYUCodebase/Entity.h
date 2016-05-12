@@ -41,5 +41,6 @@ public:
 	bool bulletDead = false;
 	bool bulletMoveLeft = false;
 	bool p1 = false;
+	int bulletLifetime;
 	
 };

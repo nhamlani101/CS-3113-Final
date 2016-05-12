@@ -24,6 +24,10 @@ void Entity::Update(float elapsed){
 
 	//if bullet
 	else {
+		bulletLifetime++;
+		if (bulletLifetime == 300) {
+			bulletDead = true;
+		}
 		if (bulletMoveLeft) {
 			velocity_x -= acceleration_x * elapsed;
 			x -= velocity_x * elapsed;

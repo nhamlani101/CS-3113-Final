@@ -11,7 +11,7 @@ vec3 saturation_func(vec3 rgb, float adjustment) {
 void main() {
 	if (level == 1) {
 		vec4 finalColor;
-		finalColor.rgb = saturation_func(texture2D( texture, texCoordVar).rgb, 2.0);
+		finalColor.rgb = saturation_func(texture2D( texture, texCoordVar).rgb, 4.0);
 		finalColor.a = texture2D( texture, texCoordVar).a;	
 		gl_FragColor = finalColor;
 	}

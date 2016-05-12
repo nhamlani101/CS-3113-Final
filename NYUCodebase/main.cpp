@@ -76,6 +76,8 @@ enum GameState { TITLE = 1, LEVEL1 = 2, LEVEL2 = 3, LEVEL3 = 4, END = 5 };
 int gameState = 1;
 bool levelInit = true;
 
+Mix_Music *music;
+Mix_Chunk* shootSound;
 
 GLuint LoadTexture(const char* image_path){
 	SDL_Surface* surface = IMG_Load(image_path);
@@ -291,6 +293,8 @@ void update(float elapsed){
 		}
 		if (event.type == SDL_KEYDOWN) {
 			if (event.key.keysym.sym == SDLK_SPACE) {
+				Mix_PlayChannel(-1, shootSound, 0);
+
 				Entity* p1Bullet = new Entity(bulletSprite, player1->x + player1->sprite->width - 0.5, player1->y, 0.5, 0.3, 7, 0, 1, 0, 1);
 				if (player1->x > player2->x) {
 					p1Bullet->bulletMoveLeft = true;
@@ -302,10 +306,11 @@ void update(float elapsed){
 				}
 				bullets.push_back(p1Bullet);
 				p1Bullet->Render(program);
-				//Mix_PlayChannel(-1, jumpSound, 0);
-
 			}
+
 			if (event.key.keysym.sym == SDLK_s) {
+				Mix_PlayChannel(-1, shootSound, 0);
+
 				Entity* p2Bullet = new Entity(bulletSprite, player2->x + player2->sprite->width - 0.5, player2->y, 0.5, 0.3, 7, 0, 1, 0, 2);
 				if (player2->x > player1->x) {
 					p2Bullet->bulletMoveLeft = true;
@@ -429,20 +434,22 @@ void checkCollisions(){
 	for (int i = 0; i < bullets.size(); i++) {
 		for (int j = 0; j < ents.size(); j++) {
 			if (!bullets[i]->bulletDead) {
-				if (j == 0 && bullets[i]->cameFrom == 1) {
-					//Do nothing we're good
-				}
-				if (j == 1 && bullets[i]->cameFrom == 2) {
-					//Do nothing we're good
-				}
-				else if (ents[j]->y - ents[j]->sprite->height / 2 < bullets[i]->y + bullets[i]->sprite->height / 2 &&
+				if (ents[j]->y - ents[j]->sprite->height / 2 < bullets[i]->y + bullets[i]->sprite->height / 2 &&
 					ents[j]->y + ents[j]->sprite->height / 2 > bullets[i]->y - bullets[i]->sprite->height / 2 &&
 					ents[j]->x + ents[j]->sprite->width / 2 > bullets[i]->x + bullets[i]->sprite->width / 2 &&
 					ents[j]->x - ents[j]->sprite->width / 2 < bullets[i]->x - bullets[i]->sprite->width / 2)
 				{
-					ents[j]->health = ents[j]->health - 1;
-					bullets[i]->bulletDead = true;
-					cout << "Player: " << j << " health: " << ents[j]->health << endl;
+					if (j == 0 && bullets[i]->cameFrom == 1) {
+						//Do nothing we're good
+					}
+					else if (j == 1 && bullets[i]->cameFrom == 2) {
+						//Do nothing we're good
+					}
+					else {
+						ents[j]->health = ents[j]->health - 1;
+						bullets[i]->bulletDead = true;
+						cout << "Player: " << j << " health: " << ents[j]->health << endl;
+					}
 				}
 			}
 		}
@@ -514,8 +521,8 @@ void resetLevel(){
 void init(){
 	SDL_Init(SDL_INIT_VIDEO);
 
-	displayWindow = SDL_CreateWindow("Player2 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 450, SDL_WINDOW_OPENGL);
-	displayWindow2 = SDL_CreateWindow("Player1 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 450, SDL_WINDOW_OPENGL);
+	displayWindow = SDL_CreateWindow("Player 2 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 450, SDL_WINDOW_OPENGL);
+	displayWindow2 = SDL_CreateWindow("Player 1 Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 600, 450, SDL_WINDOW_OPENGL);
 
 	context = SDL_GL_CreateContext(displayWindow);
 
@@ -537,9 +544,11 @@ void init(){
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
 	Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
-	Mix_Music *music;
 	music = Mix_LoadMUS("sorry.mp3");
 	Mix_PlayMusic(music, -1);
+
+	shootSound = Mix_LoadWAV("sfx.wav");
+
 	textSheet = LoadTexture("font1.png");
 
 
@@ -871,6 +880,8 @@ int main(int argc, char *argv[]){
 		}
 
 	}
+	Mix_FreeChunk(shootSound);
+	Mix_FreeMusic(music);
 	SDL_Quit();
 	return 0;
 }
