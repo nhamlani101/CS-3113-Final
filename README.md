@@ -1,4 +1,4 @@
-# CS-3113-Final
+# CS 3113 Final
 Final project for Intro to Game Programming (CS 3113)
 Created by Marcus Piazzola and Noman Hamlani
 Using OpenGL and SDL
