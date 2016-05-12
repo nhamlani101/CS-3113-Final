@@ -51,7 +51,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\SDL2_mixer\lib\x86;C:\SDL2\lib\x86;C:\SDL2_image\lib\x86;C:\glew\lib\Release\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2_mixer.lib;glew32.lib;SDL2main.lib;SDL2_image.lib;OpenGL32.lib</AdditionalDependencies>
-      <SubSystem>Windows</SubSystem>
+      <SubSystem>Console</SubSystem>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -74,23 +74,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Color.cpp" />
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
-    <ClCompile Include="ParticleEmitter.cpp" />
+    <ClCompile Include="PerlinNoise.cpp" />
     <ClCompile Include="ShaderProgram.cpp" />
     <ClCompile Include="SheetSprite.cpp" />
-    <ClCompile Include="Vector.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Color.h" />
     <ClInclude Include="Entity.h" />
     <ClInclude Include="Matrix.h" />
-    <ClInclude Include="ParticleEmitter.h" />
+    <ClInclude Include="PerlinNoise.h" />
     <ClInclude Include="ShaderProgram.h" />
     <ClInclude Include="SheetSprite.h" />
-    <ClInclude Include="Vector.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
@@ -101,17 +97,18 @@
   <ItemGroup>
     <Image Include="arne_sprites.png" />
     <Image Include="bullet.png" />
+    <Image Include="charizard2.png" />
     <Image Include="font1.png" />
-    <Image Include="particle.png" />
-    <Image Include="player1.png" />
-    <Image Include="player2.png" />
+    <Image Include="pikachu.png" />
   </ItemGroup>
   <ItemGroup>
-    <Media Include="music.mp3" />
     <Media Include="paddle_hit.wav" />
+    <Media Include="sorry.mp3" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="world1.txt" />
+    <Text Include="level1.txt" />
+    <Text Include="level2.txt" />
+    <Text Include="level3.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -35,9 +35,11 @@ public:
 	bool collidedRight = false;
 
 	Matrix modMatrix;
-	int cameFrom;
+	int cameFrom = 0;
 	int wins = 0;
 	int health = 5;
 	bool bulletDead = false;
+	bool bulletMoveLeft = false;
+	bool p1 = false;
 	
 };

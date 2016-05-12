@@ -30,13 +30,7 @@
     <ClCompile Include="SheetSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ParticleEmitter.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Vector.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Color.cpp">
+    <ClCompile Include="PerlinNoise.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -53,13 +47,7 @@
     <ClInclude Include="SheetSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Vector.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ParticleEmitter.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Color.h">
+    <ClInclude Include="PerlinNoise.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -73,32 +61,35 @@
     <Image Include="arne_sprites.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="player1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="player2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="bullet.png">
+    <Image Include="pikachu.png">
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="font1.png">
       <Filter>Resource Files</Filter>
     </Image>
-    <Image Include="particle.png">
+    <Image Include="charizard2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="bullet.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="music.mp3">
+    <Media Include="paddle_hit.wav">
       <Filter>Resource Files</Filter>
     </Media>
-    <Media Include="paddle_hit.wav">
+    <Media Include="sorry.mp3">
       <Filter>Resource Files</Filter>
     </Media>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="world1.txt">
+    <Text Include="level3.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="level2.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
+    <Text Include="level1.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
