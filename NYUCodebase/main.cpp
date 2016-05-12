@@ -741,13 +741,14 @@ void level1(string fileName){
 
 		player1ID = LoadTexture("charizard2.png");
 		p1sheet = new SheetSprite(program, player1ID, 0, 0, 1, 1, 1.0);
-		player1 = new Entity(p1sheet, 4.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, 0);
+		player1 = new Entity(p1sheet, 2, -6.0, 0.5, 0.8, 0, 0, 0, 0, 0);
+		player1->p1 = true;
 
 		ents.push_back(player1);
 
 		player2ID = LoadTexture("pikachu.png");
 		p2sheet = new SheetSprite(program, player2ID, 0, 0, 1, 1, 1.0);
-		player2 = new Entity(p2sheet, 8.0, -10.0, 0.5, 0.8, 0, 0, 0, 0, 0);
+		player2 = new Entity(p2sheet, 22.0, -6.0, 0.4, 0.8, 0, 0, 0, 0, 0);
 		ents.push_back(player2);
 
 		bulletID = LoadTexture("bullet.png");
